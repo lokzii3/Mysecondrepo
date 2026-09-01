@@ -1,10 +1,10 @@
 name: firstpipeline
 
 on:
- workflow_dispatch
+ workflow_dispatch:
 
 jobs:
-  build pana poren:
+  build_pana_poren:
     runs-on: ubuntu-latest
 
     steps:

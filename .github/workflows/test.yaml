@@ -14,7 +14,8 @@ jobs:
      - name:  checkout to runner
        uses: actions/checkout@v4
 
-     - name:  list the files
-       run: ls    
-
-    
+     - name:  Docker login
+       uses: docker/login-action@v2
+       with:
+         username: ${{vars.DOCKER_USERNAME}}
+         password: ${{secret.DOCKER_PASSWORD}}

@@ -19,6 +19,9 @@ jobs:
        with:
          username: ${{vars.DOCKER_USERNAME}}
          password: ${{secrets.DOCKER_PASSWORD}}
+         
+     - name: Remove old docker image
+       run: docker rmi lokiii2001/xogame:latest || true     
 
      - name: build docker image     
        run: docker build -t lokiii2001/xogame:latest .

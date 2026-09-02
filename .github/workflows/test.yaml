@@ -19,7 +19,7 @@ jobs:
        with:
          username: ${{vars.DOCKER_USERNAME}}
          password: ${{secrets.DOCKER_PASSWORD}}
-         
+
      - name: Remove old docker image
        run: docker rmi lokiii2001/xogame:latest || true     
 
@@ -28,3 +28,19 @@ jobs:
 
      - name: push docker image
        run: docker push lokiii2001/xogame:latest   
+
+  deploy_pana_poren:
+    runs-on: ubuntu-latest
+    needs: build_pana_poren
+    steps:
+     - name: AWS EC2 SSH
+       uses: appleboy/ssh-action@v0.1.5
+       with:
+         host: ${{vars.HOST_IP}}
+         username: ${{vars.USERNAME}}
+         password: ${{secrets.PASSWORD}}
+         script: |
+           docker pull lokiii2001/xogame:latest
+           docker stop xogame || true
+           docker rm xogame || true
+           docker run -d --name xogame -p 80:80 lokiii2001/xogame:latest

@@ -38,7 +38,7 @@ jobs:
        with:
          host: ${{vars.HOST_IP}}
          username: ${{vars.USERNAME}}
-         password: ${{secrets.PASSWORD}}
+         key: ${{secrets.PASSWORD}}
          script: |
            docker pull lokiii2001/xogame:latest
            docker stop xogame || true
